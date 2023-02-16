@@ -1,0 +1,52 @@
+{
+	"name": "lukasbestle/kirby-downloads",
+	"description": "Downloads Plugin for Kirby 3",
+	"license": "MIT",
+	"type": "kirby-plugin",
+	"version": "1.0.0-rc.1",
+	"authors": [
+		{
+			"name": "Lukas Bestle",
+			"email": "project-kirbydownloads@lukasbestle.com"
+		}
+	],
+	"require": {
+		"php": ">=8.0.0 <8.3.0",
+		"getkirby/cms": ">=3.8.0 <3.10.0",
+		"getkirby/composer-installer": "^1.1"
+	},
+	"minimum-stability": "RC",
+	"autoload-dev": {
+		"psr-4": {
+			"LukasBestle\\": "tests/"
+		}
+	},
+	"config": {
+		"allow-plugins": {
+			"getkirby/composer-installer": true
+		}
+	},
+	"extra": {
+		"installer-name": "downloads",
+		"kirby-cms-path": false
+	},
+	"scripts": {
+		"analyze": [
+			"@analyze:composer",
+			"@analyze:psalm",
+			"@analyze:phpcpd",
+			"@analyze:phpmd"
+		],
+		"analyze:composer": "composer validate --strict --no-check-version --no-check-all",
+		"analyze:phpcpd": "phpcpd --fuzzy --exclude node_modules --exclude tests --exclude vendor .",
+		"analyze:phpmd": "phpmd . ansi phpmd.xml.dist --exclude 'node_modules/*,stubs/*,tests/*,vendor/*'",
+		"analyze:psalm": "psalm",
+		"ci": [
+			"@fix",
+			"@analyze",
+			"@test"
+		],
+		"fix": "php-cs-fixer fix",
+		"test": "phpunit --stderr --coverage-html=tests/coverage"
+	}
+}
