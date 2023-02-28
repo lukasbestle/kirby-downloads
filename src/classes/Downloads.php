@@ -222,7 +222,7 @@ class Downloads
 		// filter by the search values if a query was passed and if enabled
 		if ($search && $block->content()->uiSearch()->toBool() === true) {
 			$downloads = $downloads->search($search, [
-				'fields' => ['filename', 'title']
+				'fields' => ['title']
 			]);
 		}
 
