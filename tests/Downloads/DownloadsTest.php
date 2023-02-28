@@ -35,6 +35,10 @@ class DownloadsTest extends TestCase
 						],
 
 						// with all languages
+						'content.product' => [
+							'en' => 'Product',
+							'de' => 'Produkt',
+						],
 						'extension' => [
 							'en' => 'File type',
 							'de' => 'Dateityp',
@@ -51,6 +55,7 @@ class DownloadsTest extends TestCase
 							[
 								'filename' => 'photo.jpg',
 								'content'  => [
+									'product'  => '',
 									'title'    => 'Nice marketing photo',
 									'type'     => 'photo',
 									'tags'     => 'frontal, white',
@@ -60,6 +65,7 @@ class DownloadsTest extends TestCase
 							[
 								'filename' => 'manual1.pdf',
 								'content'  => [
+									'product'  => 'white',
 									'title'    => 'Manual for the white product',
 									'type'     => 'manual',
 									'tags'     => 'german, white',
@@ -69,6 +75,7 @@ class DownloadsTest extends TestCase
 							[
 								'filename' => 'manual2.pdf',
 								'content'  => [
+									'product'  => 'black',
 									'title'    => 'Manual for the black product',
 									'type'     => 'manual',
 									'tags'     => 'german, black',
@@ -350,7 +357,7 @@ class DownloadsTest extends TestCase
 					'value' => 'white',
 				],
 			],
-			'uiFilters' => 'extension;; content.tags.split(",");; content.type;; this.is.invalid;; this.is.notdefined',
+			'uiFilters' => 'extension;; content.tags.split(",");; content.type;; content.product;; this.is.invalid;; this.is.notdefined',
 		]);
 
 		$this->assertSame([
@@ -365,6 +372,10 @@ class DownloadsTest extends TestCase
 			'content.type' => [
 				'label' => 'Type',
 				'options' => ['photo', 'manual'],
+			],
+			'content.product' => [
+				'label' => 'Produkt',
+				'options' => ['white'],
 			],
 			'this.is.invalid' => [
 				'label' => 'and does not resolve to anything',

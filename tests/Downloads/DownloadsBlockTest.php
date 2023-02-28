@@ -33,6 +33,10 @@ class DownloadsBlockTest extends TestCase
 						],
 
 						// with all languages
+						'content.product' => [
+							'en' => 'Product',
+							'de' => 'Produkt',
+						],
 						'extension' => [
 							'en' => 'File type',
 							'de' => 'Dateityp',
@@ -57,6 +61,7 @@ class DownloadsBlockTest extends TestCase
 							[
 								'filename' => 'photo.jpg',
 								'content'  => [
+									'product'  => '',
 									'title'    => 'Nice marketing photo',
 									'type'     => 'photo',
 									'tags'     => 'frontal, white',
@@ -66,6 +71,7 @@ class DownloadsBlockTest extends TestCase
 							[
 								'filename' => 'manual1.pdf',
 								'content'  => [
+									'product'  => 'white',
 									'title'    => 'Manual for the white product',
 									'type'     => 'manual',
 									'tags'     => 'german, white',
@@ -75,6 +81,7 @@ class DownloadsBlockTest extends TestCase
 							[
 								'filename' => 'manual2.pdf',
 								'content'  => [
+									'product'  => 'black',
 									'title'    => 'Manual for the black product',
 									'type'     => 'manual',
 									'tags'     => 'german, black',
@@ -179,6 +186,7 @@ class DownloadsBlockTest extends TestCase
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_extension' => 'pdf',
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_content-tags-split' => ['frontal', 'german'],
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_content-type' => 'manual',
+					'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_content-product' => 'black',
 				]
 			]
 		]);
@@ -194,7 +202,7 @@ class DownloadsBlockTest extends TestCase
 						'value' => 'white'
 					],
 				],
-				'uiFilters' => 'extension;; content.tags.split(",");; content.type;; this.is.invalid',
+				'uiFilters' => 'extension;; content.tags.split(",");; content.type;; content.product;; this.is.invalid',
 			],
 			'id'     => '12345678-90ab-cdef-1234-567890abcdef',
 			'parent' => $parent = $this->kirby->page('test1/test2'),
@@ -223,6 +231,12 @@ class DownloadsBlockTest extends TestCase
 				'options' => [
 					'photo'  => false,
 					'manual' => true,
+				],
+			],
+			'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_content-product' => [
+				'label' => 'Produkt',
+				'options' => [
+					'white' => false,
 				],
 			],
 		], $block->filters());

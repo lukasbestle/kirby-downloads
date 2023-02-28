@@ -184,8 +184,8 @@ class Downloads
 				$values = A::wrap(static::query($download, $query));
 
 				foreach ($values as $value) {
-					if ($value === null) {
-						continue; // @codeCoverageIgnore
+					if (empty($value) === true) {
+						continue;
 					}
 
 					if (in_array($value, $result[$query]['options']) !== true) {
