@@ -222,15 +222,15 @@ class DownloadsBlockTest extends TestCase
 				'label' => 'Tag',
 				'options' => [
 					'frontal' => true,
-					'white'   => false,
 					'german'  => true,
+					'white'   => false,
 				],
 			],
 			'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_content-type' => [
 				'label' => 'Type',
 				'options' => [
-					'photo'  => false,
 					'manual' => true,
+					'photo'  => false,
 				],
 			],
 			'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_content-product' => [

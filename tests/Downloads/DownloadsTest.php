@@ -367,11 +367,11 @@ class DownloadsTest extends TestCase
 			],
 			'content.tags.split(",")' => [
 				'label' => 'Tag',
-				'options' => ['frontal', 'white', 'german'],
+				'options' => ['frontal', 'german', 'white'],
 			],
 			'content.type' => [
 				'label' => 'Type',
-				'options' => ['photo', 'manual'],
+				'options' => ['manual', 'photo'],
 			],
 			'content.product' => [
 				'label' => 'Produkt',

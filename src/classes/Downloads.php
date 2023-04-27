@@ -181,18 +181,19 @@ class Downloads
 		foreach ($this->downloads($block) as $download) {
 			foreach ($fields as $query => $label) {
 				/** @var list<string|null> $values */
-				$values = A::wrap(static::query($download, $query));
+				$values = array_filter(A::wrap(static::query($download, $query)));
 
 				foreach ($values as $value) {
-					if (empty($value) === true) {
-						continue;
-					}
-
 					if (in_array($value, $result[$query]['options']) !== true) {
 						$result[$query]['options'][] = $value;
 					}
 				}
 			}
+		}
+
+		// sort the final option lists alphabetically
+		foreach ($result as $query => $data) {
+			sort($result[$query]['options']);
 		}
 
 		return $result;
