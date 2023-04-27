@@ -243,6 +243,76 @@ class DownloadsBlockTest extends TestCase
 	}
 
 	/**
+	 * @covers ::hasActiveForm
+	 */
+	public function testHasActiveForm_No()
+	{
+		$block = new DownloadsBlock([
+			'content' => [
+				'uiFilters' => 'extension;; content.type'
+			],
+			'id'     => '12345678-90ab-cdef-1234-567890abcdef',
+			'parent' => $parent = $this->kirby->page('test1/test2'),
+			'field'  => new Field($parent, 'text', 'abcde'),
+			'type'   => 'downloads',
+		]);
+
+		$this->assertFalse($block->hasActiveForm());
+	}
+
+	/**
+	 * @covers ::hasActiveForm
+	 */
+	public function testHasActiveForm_YesFilter()
+	{
+		$kirby = $this->kirby->clone([
+			'request' => [
+				'body' => [
+					'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_extension' => 'pdf',
+				]
+			]
+		]);
+
+		$block = new DownloadsBlock([
+			'content' => [
+				'uiFilters' => 'extension;; content.type'
+			],
+			'id'     => '12345678-90ab-cdef-1234-567890abcdef',
+			'parent' => $parent = $kirby->page('test1/test2'),
+			'field'  => new Field($parent, 'text', 'abcde'),
+			'type'   => 'downloads',
+		]);
+
+		$this->assertTrue($block->hasActiveForm());
+	}
+
+	/**
+	 * @covers ::hasActiveForm
+	 */
+	public function testHasActiveForm_YesSearch()
+	{
+		$kirby = $this->kirby->clone([
+			'request' => [
+				'body' => [
+					'downloads-12345678-90ab-cdef-1234-567890abcdef_search' => 'nice',
+				]
+			]
+		]);
+
+		$block = new DownloadsBlock([
+			'content' => [
+				'uiFilters' => 'extension;; content.type'
+			],
+			'id'     => '12345678-90ab-cdef-1234-567890abcdef',
+			'parent' => $parent = $kirby->page('test1/test2'),
+			'field'  => new Field($parent, 'text', 'abcde'),
+			'type'   => 'downloads',
+		]);
+
+		$this->assertTrue($block->hasActiveForm());
+	}
+
+	/**
 	 * @covers ::hasFilters
 	 */
 	public function testHasFilters_No()

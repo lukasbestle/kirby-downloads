@@ -86,6 +86,25 @@ class DownloadsBlock extends Block
 	}
 
 	/**
+	 * Returns whether at least one filter or the search
+	 * have user input in them
+	 *
+	 * @return bool
+	 */
+	public function hasActiveForm(): bool
+	{
+		$htmlId = $this->htmlId();
+
+		foreach ($this->kirby()->request()->data() as $key => $value) {
+			if (Str::startsWith($key, $htmlId) === true) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Returns whether at least one UI filter was enabled
 	 */
 	public function hasFilters(): bool
