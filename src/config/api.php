@@ -11,7 +11,7 @@ return [
 			 * a downloads block
 			 */
 			'pattern' => 'downloads/(:any)/(:any)/(:any)',
-			'method'  => 'POST',
+			'method'  => 'GET',
 			'auth'    => false,
 			'action'  => function (string $page, string $field, string $id): array|Response {
 				/** @psalm-scope-this Kirby\Http\Route */

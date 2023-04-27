@@ -182,7 +182,7 @@ class DownloadsBlockTest extends TestCase
 	{
 		$kirby = $this->kirby->clone([
 			'request' => [
-				'body' => [
+				'query' => [
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_extension' => 'pdf',
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_content-tags-split' => ['frontal', 'german'],
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_content-type' => 'manual',
@@ -267,7 +267,7 @@ class DownloadsBlockTest extends TestCase
 	{
 		$kirby = $this->kirby->clone([
 			'request' => [
-				'body' => [
+				'query' => [
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_extension' => 'pdf',
 				]
 			]
@@ -293,7 +293,7 @@ class DownloadsBlockTest extends TestCase
 	{
 		$kirby = $this->kirby->clone([
 			'request' => [
-				'body' => [
+				'query' => [
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_search' => 'nice',
 				]
 			]
@@ -466,7 +466,7 @@ class DownloadsBlockTest extends TestCase
 	{
 		$kirby = $this->kirby->clone([
 			'request' => [
-				'body' => [
+				'query' => [
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_extension' => 'pdf',
 				]
 			]
@@ -500,7 +500,7 @@ class DownloadsBlockTest extends TestCase
 	{
 		$kirby = $this->kirby->clone([
 			'request' => [
-				'body' => [
+				'query' => [
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_extension' => ['jpg', 'png'],
 				]
 			]
@@ -534,7 +534,7 @@ class DownloadsBlockTest extends TestCase
 	{
 		$kirby = $this->kirby->clone([
 			'request' => [
-				'body' => [
+				'query' => [
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_search' => 'nice',
 				]
 			]
@@ -569,7 +569,7 @@ class DownloadsBlockTest extends TestCase
 	{
 		$kirby = $this->kirby->clone([
 			'request' => [
-				'body' => [
+				'query' => [
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_extension' => ['pdf'],
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_search' => 'nice',
 				]
@@ -605,7 +605,7 @@ class DownloadsBlockTest extends TestCase
 	{
 		$kirby = $this->kirby->clone([
 			'request' => [
-				'body' => [
+				'query' => [
 					'downloads-12345678-90ab-cdef-1234-567890abcdef_search' => 'this is a test',
 				]
 			]

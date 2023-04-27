@@ -9,7 +9,7 @@ use Kirby\Toolkit\Str;
 ?>
 <figure class="downloads" id="<?= Escape::attr($block->htmlId()) ?>">
 	<?php if ($block->hasFilters() === true || $block->hasSearch() === true): ?>
-	<form action="<?= Escape::attr(Uri::current() . '#' . $block->htmlId()) ?>" method="POST">
+	<form action="<?= Escape::attr(Uri::current() . '#' . $block->htmlId()) ?>" method="GET">
 		<?php if ($block->hasFilters() === true): ?>
 		<?php foreach ($block->filters() as $name => $data): ?>
 		<fieldset>
