@@ -130,8 +130,10 @@ class DownloadsBlock extends Block
 
 	/**
 	 * Returns the block's downloads matching the current UI filters
+	 *
+	 * @param string|null $paginationVar Overrides the query variable for pagination
 	 */
-	public function results(): Files
+	public function results(?string $paginationVar = null): Files
 	{
 		$downloads = Downloads::instance();
 		$request   = $this->kirby()->request();
@@ -146,11 +148,21 @@ class DownloadsBlock extends Block
 			}
 		}
 
-		return $downloads->results(
+		$results = $downloads->results(
 			$this,
 			$filters,
 			$request->get($prefix . '_search', '')
 		);
+
+		$paginate = $this->kirby()->option('lukasbestle.downloads.paginate');
+		if (is_int($paginate) === true) {
+			$results = $results->paginate($paginate, [
+				'method'   => 'query',
+				'variable' => $paginationVar ?? $this->htmlId() . '_p'
+			]);
+		}
+
+		return $results;
 	}
 
 	/**

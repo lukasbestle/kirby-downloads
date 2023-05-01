@@ -11,6 +11,8 @@ return [
 	'lukasbestle.downloads.interface.info' => 'Wähle, welche Optionen auf der Seite angezeigt werden sollen.',
 	'lukasbestle.downloads.manual' => 'Manuell',
 	'lukasbestle.downloads.mode' => 'Auswahlmodus',
+	'lukasbestle.downloads.pagination.next' => 'nächste Seite',
+	'lukasbestle.downloads.pagination.previous' => 'vorherige Seite',
 	'lukasbestle.downloads.search' => 'Suche',
 	'lukasbestle.downloads.selection' => 'Auswahl',
 	'lukasbestle.downloads.selection.info' => 'Treffe eine Vorauswahl der Downloads, die in diesem Block gelistet werden.',

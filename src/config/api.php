@@ -24,7 +24,9 @@ return [
 					->get($id);
 
 				if ($block !== null) {
-					return $block->results()->toArray(function (File $download) {
+					$results = $block->results('page');
+
+					$resultsArray = $results->toArray(function (File $download) {
 						return [
 							'filename' => $download->filename(),
 							'title'    => $download->content()->title()->value(),
@@ -33,6 +35,11 @@ return [
 							'url'      => $download->url(),
 						];
 					});
+
+					return [
+						'results' => $resultsArray,
+						'pagination' => $results->pagination()?->toArray()
+					];
 				}
 
 				return new Response('Not found', 'text/plain', 404);

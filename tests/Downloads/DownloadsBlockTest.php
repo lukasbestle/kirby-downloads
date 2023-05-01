@@ -436,6 +436,7 @@ class DownloadsBlockTest extends TestCase
 
 		$downloads = $block->results();
 		$this->assertSame(['downloads/manual1.pdf', 'downloads/manual2.pdf'], $downloads->keys());
+		$this->assertSame(15, $downloads->pagination()->limit());
 	}
 
 	/**
@@ -457,6 +458,110 @@ class DownloadsBlockTest extends TestCase
 
 		$downloads = $block->results();
 		$this->assertSame(['downloads/photo.jpg', 'downloads/manual2.pdf'], $downloads->keys());
+		$this->assertSame(15, $downloads->pagination()->limit());
+	}
+
+	/**
+	 * @covers ::results
+	 */
+	public function testResults_Pagination()
+	{
+		$kirby = $this->kirby->clone([
+			'options' => [
+				'lukasbestle.downloads' => [
+					'paginate' => 2,
+				],
+			],
+			'request' => [
+				'query' => [
+					'downloads-12345678-90ab-cdef-1234-567890abcdef_p' => 2,
+				],
+			],
+		]);
+
+		$block = new DownloadsBlock([
+			'content' => [
+				'mode'    => 'filters',
+				'filters' => [],
+			],
+			'id'     => '12345678-90ab-cdef-1234-567890abcdef',
+			'parent' => $parent = $kirby->page('test1/test2'),
+			'field'  => new Field($parent, 'text', 'abcde'),
+			'type'   => 'downloads',
+		]);
+
+		$downloads = $block->results();
+		$this->assertSame(['downloads/manual2.pdf'], $downloads->keys());
+		$this->assertSame(2, $downloads->pagination()->limit());
+	}
+
+	/**
+	 * @covers ::results
+	 */
+	public function testResults_PaginationCustomVar()
+	{
+		$kirby = $this->kirby->clone([
+			'options' => [
+				'lukasbestle.downloads' => [
+					'paginate' => 2,
+				],
+			],
+			'request' => [
+				'query' => [
+					'downloads-12345678-90ab-cdef-1234-567890abcdef_p' => 3,
+					'page' => 2,
+				],
+			],
+		]);
+
+		$block = new DownloadsBlock([
+			'content' => [
+				'mode'    => 'filters',
+				'filters' => [],
+			],
+			'id'     => '12345678-90ab-cdef-1234-567890abcdef',
+			'parent' => $parent = $kirby->page('test1/test2'),
+			'field'  => new Field($parent, 'text', 'abcde'),
+			'type'   => 'downloads',
+		]);
+
+		$downloads = $block->results('page');
+		$this->assertSame(['downloads/manual2.pdf'], $downloads->keys());
+		$this->assertSame(2, $downloads->pagination()->limit());
+	}
+
+	/**
+	 * @covers ::results
+	 */
+	public function testResults_PaginationLimitDisabled()
+	{
+		$kirby = $this->kirby->clone([
+			'options' => [
+				'lukasbestle.downloads' => [
+					'paginate' => null,
+				],
+			],
+			'request' => [
+				'query' => [
+					'downloads-12345678-90ab-cdef-1234-567890abcdef_p' => 3,
+				],
+			],
+		]);
+
+		$block = new DownloadsBlock([
+			'content' => [
+				'mode'    => 'filters',
+				'filters' => [],
+			],
+			'id'     => '12345678-90ab-cdef-1234-567890abcdef',
+			'parent' => $parent = $kirby->page('test1/test2'),
+			'field'  => new Field($parent, 'text', 'abcde'),
+			'type'   => 'downloads',
+		]);
+
+		$downloads = $block->results();
+		$this->assertSame(['downloads/photo.jpg', 'downloads/manual1.pdf', 'downloads/manual2.pdf'], $downloads->keys());
+		$this->assertSame(null, $downloads->pagination());
 	}
 
 	/**
@@ -491,6 +596,7 @@ class DownloadsBlockTest extends TestCase
 
 		$downloads = $block->results();
 		$this->assertSame(['downloads/manual1.pdf'], $downloads->keys());
+		$this->assertSame(15, $downloads->pagination()->limit());
 	}
 
 	/**
@@ -525,6 +631,7 @@ class DownloadsBlockTest extends TestCase
 
 		$downloads = $block->results();
 		$this->assertSame(['downloads/photo.jpg'], $downloads->keys());
+		$this->assertSame(15, $downloads->pagination()->limit());
 	}
 
 	/**
@@ -560,6 +667,7 @@ class DownloadsBlockTest extends TestCase
 
 		$downloads = $block->results();
 		$this->assertSame(['downloads/photo.jpg'], $downloads->keys());
+		$this->assertSame(15, $downloads->pagination()->limit());
 	}
 
 	/**
@@ -596,6 +704,7 @@ class DownloadsBlockTest extends TestCase
 
 		$downloads = $block->results();
 		$this->assertSame([], $downloads->keys());
+		$this->assertSame(15, $downloads->pagination()->limit());
 	}
 
 	/**
