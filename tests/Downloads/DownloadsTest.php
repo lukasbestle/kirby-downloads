@@ -28,20 +28,45 @@ class DownloadsTest extends TestCase
 
 						// with at least the default language and automatic fallback
 						'content.type' => [
-							'en' => 'Type',
+							'label' => [
+								'en' => 'Type',
+							],
+							'options' => [
+								'manual' => 'Manual',
+								'photo' => [
+									'en' => 'Photo',
+								],
+								'invalid' => 'is not actually used',
+							],
 						],
 						'mime' => [
-							'en' => 'MIME type',
+							'label' => [
+								'en' => 'MIME type',
+							],
 						],
 
 						// with all languages
 						'content.product' => [
-							'en' => 'Product',
-							'de' => 'Produkt',
+							'label' => [
+								'en' => 'Product',
+								'de' => 'Produkt',
+							],
 						],
 						'extension' => [
-							'en' => 'File type',
-							'de' => 'Dateityp',
+							'label' => [
+								'en' => 'File type',
+								'de' => 'Dateityp',
+							],
+							'options' => [
+								'jpg' => [
+									'en' => 'JPEG',
+									'de' => 'Jäipäg',
+								],
+								'pdf' => [
+									'en' => 'PDF',
+									'de' => 'PeDeEff',
+								],
+							],
 						],
 					],
 					'template' => 'download',
@@ -306,9 +331,25 @@ class DownloadsTest extends TestCase
 		]);
 
 		$this->assertSame([
-			'extension' => 'Dateityp',
-			'content.tags.split(",")' => 'Tag',
-			'content.type' => 'Type',
+			'extension' => [
+				'label' => 'Dateityp',
+				'options' => [
+					'jpg' => 'Jäipäg',
+					'pdf' => 'PeDeEff',
+				],
+			],
+			'content.tags.split(",")' => [
+				'label' => 'Tag',
+				'options' => [],
+			],
+			'content.type' => [
+				'label' => 'Type',
+				'options' => [
+					'manual' => 'Manual',
+					'photo' => 'Photo',
+					'invalid' => 'is not actually used',
+				],
+			],
 		], $this->downloads->fields($block));
 	}
 
@@ -363,19 +404,19 @@ class DownloadsTest extends TestCase
 		$this->assertSame([
 			'extension' => [
 				'label' => 'Dateityp',
-				'options' => ['jpg', 'pdf'],
+				'options' => ['jpg' => 'Jäipäg', 'pdf' => 'PeDeEff'],
 			],
 			'content.tags.split(",")' => [
 				'label' => 'Tag',
-				'options' => ['frontal', 'german', 'white'],
+				'options' => ['frontal' => 'frontal', 'german' => 'german', 'white' => 'white'],
 			],
 			'content.type' => [
 				'label' => 'Type',
-				'options' => ['manual', 'photo'],
+				'options' => ['manual' => 'Manual', 'photo' => 'Photo'],
 			],
 			'content.product' => [
 				'label' => 'Produkt',
-				'options' => ['white'],
+				'options' => ['white' => 'white'],
 			],
 			'this.is.invalid' => [
 				'label' => 'and does not resolve to anything',

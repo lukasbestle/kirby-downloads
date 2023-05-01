@@ -113,7 +113,7 @@ class Downloads
 	/**
 	 * Returns the UI filters for the provided block instance
 	 *
-	 * @return array<string, string>
+	 * @return array<string, array{label: string, options: array<string, string>}>
 	 */
 	public function fields(DownloadsBlock $block): array
 	{
@@ -128,9 +128,24 @@ class Downloads
 				continue;
 			}
 
-			/** @var string $label */
-			$label = I18n::translate($fields[$field], $fields[$field]);
-			$result[$field] = $label;
+			$fieldConfig = $fields[$field];
+
+			// expand a simple key-value config to a full-fledged array
+			if (is_string($fieldConfig) === true) {
+				$fieldConfig = [
+					'label' => $fieldConfig
+				];
+			}
+
+			// ensure that all required props are set
+			$fieldConfig['label']   ??= $field;
+			$fieldConfig['options'] ??= [];
+
+			// translate the label and all option labels
+			$fieldConfig['label'] = I18n::translate($fieldConfig['label'], $fieldConfig['label']);
+			array_walk($fieldConfig['options'], fn (&$label) => $label = I18n::translate($label, $label));
+
+			$result[$field] = $fieldConfig;
 		}
 
 		return $result;
@@ -165,16 +180,17 @@ class Downloads
 	 * Returns the UI filters and their possible options
 	 * for the provided block instance
 	 *
-	 * @return array<string, array{label: string, options: string[]}>
+	 * @return array<string, array{label: string, options: array<string, string>}>
 	 */
 	public function options(DownloadsBlock $block): array
 	{
 		$fields = $this->fields($block);
 
-		// convert the fields into the nested return value structure
+		// create a duplicate that will receive the actual possible options
 		$result = [];
-		foreach ($fields as $query => $label) {
-			$result[$query] = ['label' => $label, 'options' => []];
+		foreach ($fields as $query => $data) {
+			$data['options'] = [];
+			$result[$query] = $data;
 		}
 
 		// collect all possible values for each of the fields
@@ -184,16 +200,17 @@ class Downloads
 				$values = array_filter(A::wrap(static::query($download, $query)));
 
 				foreach ($values as $value) {
-					if (in_array($value, $result[$query]['options']) !== true) {
-						$result[$query]['options'][] = $value;
+					if (isset($result[$query]['options'][$value]) !== true) {
+						// use the configured label as value if possible
+						$result[$query]['options'][$value] = $fields[$query]['options'][$value] ?? $value;
 					}
 				}
 			}
 		}
 
-		// sort the final option lists alphabetically
+		// sort the final option lists alphabetically by their values
 		foreach ($result as $query => $data) {
-			sort($result[$query]['options']);
+			asort($result[$query]['options']);
 		}
 
 		return $result;

@@ -57,9 +57,9 @@ class DownloadsBlock extends Block
 	 * Returns the UI filters and their possible options:
 	 * the first level has the form name as key;
 	 * the value contains the label and a list of options
-	 * with their name and their active state
+	 * with their name, label and their active state
 	 *
-	 * @return array<string, array{label: string, options: array<string, bool>}>
+	 * @return array<string, array{label: string, options: array<string, array{active: bool, label: string}>}>
 	 */
 	public function filters(): array
 	{
@@ -72,8 +72,11 @@ class DownloadsBlock extends Block
 
 			$options = [];
 			$values  = A::wrap($this->kirby()->request()->get($name));
-			foreach ($data['options'] as $option) {
-				$options[$option] = in_array($option, $values) === true;
+			foreach ($data['options'] as $option => $label) {
+				$options[$option] = [
+					'active' => in_array($option, $values) === true,
+					'label'  => $label,
+				];
 			}
 
 			$filters[$name] = [

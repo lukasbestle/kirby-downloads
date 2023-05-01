@@ -43,6 +43,14 @@ $uiFields = [
 
 // add the filters if filter fields were defined in the config
 if (is_array($fields) === true) {
+	// for the blueprint we just need the field queries (keys)
+	// and labels (values), not the options
+	array_walk($fields, function (array|string &$field) {
+		if (is_array($field) === true) {
+			$field = $field['label'];
+		}
+	});
+
 	// prepend the mode selector and filter field to the selection fieldset
 	$selectionFields = [
 		'mode' => [

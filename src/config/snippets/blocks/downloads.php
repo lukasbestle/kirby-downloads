@@ -11,19 +11,19 @@ $results = $block->results();
 	<?php if ($block->hasFilters() === true || $block->hasSearch() === true): ?>
 	<form action="<?= Escape::attr($block->parent()->url() . '#' . $block->htmlId()) ?>" method="GET">
 		<?php if ($block->hasFilters() === true): ?>
-		<?php foreach ($block->filters() as $name => $data): ?>
+		<?php foreach ($block->filters() as $name => $filterData): ?>
 		<fieldset>
-			<legend><?= Escape::html($data['label']) ?></legend>
+			<legend><?= Escape::html($filterData['label']) ?></legend>
 
-			<?php foreach ($data['options'] as $option => $active): ?>
+			<?php foreach ($filterData['options'] as $option => $optionData): ?>
 			<input
 				type="checkbox"
 				id="<?= Escape::attr($name . '_' . Str::slug($option)) ?>"
 				name="<?= Escape::attr($name) ?>[]"
 				value="<?= Escape::attr($option) ?>"
-				<?php if ($active === true): ?>checked<?php endif ?>
+				<?php if ($optionData['active'] === true): ?>checked<?php endif ?>
 			>
-			<label for="<?= Escape::attr($name . '_' . Str::slug($option)) ?>"><?= Escape::html($option) ?></label>
+			<label for="<?= Escape::attr($name . '_' . Str::slug($option)) ?>"><?= Escape::html($optionData['label']) ?></label>
 			<?php endforeach ?>
 		</fieldset>
 		<?php endforeach ?>

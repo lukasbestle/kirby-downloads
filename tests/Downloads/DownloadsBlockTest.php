@@ -26,20 +26,45 @@ class DownloadsBlockTest extends TestCase
 
 						// with at least the default language and automatic fallback
 						'content.type' => [
-							'en' => 'Type',
+							'label' => [
+								'en' => 'Type',
+							],
+							'options' => [
+								'manual' => 'Manual',
+								'photo' => [
+									'en' => 'Photo',
+								],
+								'invalid' => 'is not actually used',
+							],
 						],
 						'mime' => [
-							'en' => 'MIME type',
+							'label' => [
+								'en' => 'MIME type',
+							],
 						],
 
 						// with all languages
 						'content.product' => [
-							'en' => 'Product',
-							'de' => 'Produkt',
+							'label' => [
+								'en' => 'Product',
+								'de' => 'Produkt',
+							],
 						],
 						'extension' => [
-							'en' => 'File type',
-							'de' => 'Dateityp',
+							'label' => [
+								'en' => 'File type',
+								'de' => 'Dateityp',
+							],
+							'options' => [
+								'jpg' => [
+									'en' => 'JPEG',
+									'de' => 'Jäipäg',
+								],
+								'pdf' => [
+									'en' => 'PDF',
+									'de' => 'PeDeEff',
+								],
+							],
 						],
 					],
 					'template' => 'download',
@@ -214,29 +239,53 @@ class DownloadsBlockTest extends TestCase
 			'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_extension' => [
 				'label' => 'Dateityp',
 				'options' => [
-					'jpg' => false,
-					'pdf' => true,
+					'jpg' => [
+						'active' => false,
+						'label' => 'Jäipäg',
+					],
+					'pdf' => [
+						'active' => true,
+						'label' => 'PeDeEff',
+					],
 				],
 			],
 			'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_content-tags-split' => [
 				'label' => 'Tag',
 				'options' => [
-					'frontal' => true,
-					'german'  => true,
-					'white'   => false,
+					'frontal' => [
+						'active' => true,
+						'label' => 'frontal',
+					],
+					'german'  => [
+						'active' => true,
+						'label' => 'german',
+					],
+					'white'   => [
+						'active' => false,
+						'label' => 'white',
+					],
 				],
 			],
 			'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_content-type' => [
 				'label' => 'Type',
 				'options' => [
-					'manual' => true,
-					'photo'  => false,
+					'manual' => [
+						'active' => true,
+						'label' => 'Manual',
+					],
+					'photo'  => [
+						'active' => false,
+						'label' => 'Photo',
+					],
 				],
 			],
 			'downloads-12345678-90ab-cdef-1234-567890abcdef_filter_content-product' => [
 				'label' => 'Produkt',
 				'options' => [
-					'white' => false,
+					'white' => [
+						'active' => false,
+						'label' => 'white',
+					],
 				],
 			],
 		], $block->filters());
