@@ -114,6 +114,7 @@ class Downloads
 	 * Returns the UI filters for the provided block instance
 	 *
 	 * @return array<string, array{label: string, options: array<string, string>}>
+	 * @psalm-return array
 	 */
 	public function fields(DownloadsBlock $block): array
 	{
@@ -143,7 +144,10 @@ class Downloads
 
 			// translate the label and all option labels
 			$fieldConfig['label'] = I18n::translate($fieldConfig['label'], $fieldConfig['label']);
-			array_walk($fieldConfig['options'], fn (&$label) => $label = I18n::translate($label, $label));
+			array_walk($fieldConfig['options'], function (string|array &$label) {
+				/** @var string $label */
+				$label = I18n::translate($label, $label);
+			});
 
 			$result[$field] = $fieldConfig;
 		}
@@ -194,9 +198,10 @@ class Downloads
 		}
 
 		// collect all possible values for each of the fields
+		$fieldQueries = array_keys($fields);
 		foreach ($this->downloads($block) as $download) {
-			foreach ($fields as $query => $label) {
-				/** @var list<string|null> $values */
+			foreach ($fieldQueries as $query) {
+				/** @var list<string> $values */
 				$values = array_filter(A::wrap(static::query($download, $query)));
 
 				foreach ($values as $value) {

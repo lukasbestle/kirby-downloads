@@ -98,7 +98,7 @@ class DownloadsBlock extends Block
 	{
 		$htmlId = $this->htmlId();
 
-		foreach ($this->kirby()->request()->data() as $key => $value) {
+		foreach (array_keys($this->kirby()->request()->data()) as $key) {
 			if (Str::startsWith($key, $htmlId) === true) {
 				return true;
 			}
@@ -159,6 +159,7 @@ class DownloadsBlock extends Block
 
 		$paginate = $this->kirby()->option('lukasbestle.downloads.paginate');
 		if (is_int($paginate) === true) {
+			/** @var \Kirby\Cms\Files $results */
 			$results = $results->paginate($paginate, [
 				'method'   => 'query',
 				'variable' => $paginationVar ?? $this->htmlId() . '_p'
