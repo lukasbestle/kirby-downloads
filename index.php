@@ -23,7 +23,11 @@ if (
 	$kirbyVersion !== null &&
 	(
 		version_compare($kirbyVersion, '3.8.0-rc.1', '<') === true ||
-		version_compare($kirbyVersion, '3.10.0-alpha', '>=') === true
+		(
+			version_compare($kirbyVersion, '4.0.0-alpha', '>=') === true &&
+			version_compare($kirbyVersion, '4.1.0-rc.1', '<') === true
+		) ||
+		version_compare($kirbyVersion, '5.0.0-alpha', '>=') === true
 	)
 ) {
 	throw new Exception(

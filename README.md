@@ -1,4 +1,4 @@
-# Downloads Block for Kirby 3
+# Downloads Block for Kirby
 
 [![Kirby 3.8.0+](https://img.shields.io/badge/Kirby-3.8.0%2B-green)](https://getkirby.com)
 [![MIT license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
@@ -26,8 +26,8 @@ This plugin is for you if you manage a site with lots of downloads (e.g. product
 
 ## Requirements
 
-- Kirby 3.8.0+
-- PHP 8.0+
+- Kirby 3.8.0+ or 4.1.0+
+- PHP 8.1+
 
 ## Documentation
 
