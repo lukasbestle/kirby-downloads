@@ -92,8 +92,8 @@ class Downloads
 
 			// chain all filters to get results with `AND` logic
 			foreach ($block->content()->filters()->toStructure() as $filter) {
-				$field = $filter->field()->value();
-				$values = $filter->value()->split(';;');
+				$field = $filter->content()->field()->value();
+				$values = $filter->content()->value()->split(';;');
 
 				// the block's fields need to be a subset of the configured fields
 				if (isset($fields[$field]) !== true) {
