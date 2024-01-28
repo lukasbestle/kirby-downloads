@@ -17,6 +17,9 @@ class DownloadsBlockTest extends TestCase
 	public function setUp(): void
 	{
 		$this->kirby = new App([
+			'roots' => [
+				'index' => '/dev/null'
+			],
 			'options' => [
 				'lukasbestle.downloads' => [
 					'path' => 'downloads',
