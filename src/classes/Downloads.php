@@ -58,6 +58,10 @@ class Downloads
 		$path     = $this->kirby->option('lukasbestle.downloads.path');
 		$template = $this->kirby->option('lukasbestle.downloads.template');
 
+		if (empty($path) === true) {
+			throw new Exception('Downloads path is not defined');
+		}
+
 		$downloads = $this->kirby->site()->find($path)?->files();
 
 		if ($template !== null) {

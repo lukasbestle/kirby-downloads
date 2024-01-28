@@ -173,7 +173,7 @@ class DownloadsTest extends TestCase
 		]);
 
 		$this->expectException(Exception::class);
-		$this->expectExceptionMessage('Could not find downloads');
+		$this->expectExceptionMessage('Downloads path is not defined');
 		new Downloads($kirby);
 	}
 
