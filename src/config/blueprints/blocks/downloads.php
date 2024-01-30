@@ -5,6 +5,7 @@ use Kirby\Toolkit\I18n;
 
 $kirby = App::instance();
 
+/** @var string $path */
 $path     = $kirby->option('lukasbestle.downloads.path');
 $fields   = $kirby->option('lukasbestle.downloads.fields');
 $template = $kirby->option('lukasbestle.downloads.template');
