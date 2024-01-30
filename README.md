@@ -8,6 +8,8 @@
 
 > Block plugin to embed a list of downloads from a central storage page with filters and search into your Kirby site
 
+![Screenshot of the Downloads block settings in the Kirby Panel](https://raw.githubusercontent.com/wiki/lukasbestle/kirby-downloads/selection-filters.png)
+
 ## Support my work
 
 > The Downloads plugin is completely free and published under the terms of the MIT license. I do not sell licenses or accept donations, but I'm available for contract work regarding feature development for this plugin.
