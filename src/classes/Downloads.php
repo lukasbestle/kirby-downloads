@@ -178,6 +178,7 @@ class Downloads
 
 	/**
 	 * Returns the Kirby App instance
+	 * @codeCoverageIgnore
 	 */
 	public function kirby(): App
 	{
