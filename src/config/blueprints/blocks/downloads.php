@@ -9,6 +9,7 @@ $kirby = App::instance();
 $path     = $kirby->option('lukasbestle.downloads.path');
 $fields   = $kirby->option('lukasbestle.downloads.fields');
 $template = $kirby->option('lukasbestle.downloads.template');
+$search   = $kirby->option('lukasbestle.downloads.search');
 
 // if a template was defined, convert it into a query filter
 $templateFilter = '';
@@ -35,12 +36,15 @@ $uiFields = [
 		'type'  => 'info',
 		'text'  => I18n::translate('lukasbestle.downloads.interface.info'),
 	],
-	'uiSearch' => [
+];
+
+if ($search === true) {
+	$uiFields['uiSearch'] = [
 		'label' => I18n::translate('lukasbestle.downloads.search'),
 		'type'  => 'toggle',
 		'width' => '1/2',
-	],
-];
+	];
+}
 
 // add the filters if filter fields were defined in the config
 if (is_array($fields) === true) {

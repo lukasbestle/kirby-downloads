@@ -14,6 +14,10 @@ return [
 	// can be set to `null` to disable pagination
 	'paginate' => 15,
 
+	// Whether search can be enabled in the Panel;
+	// defaults to search being an option
+	'search' => true,
+
 	// File template of the download files inside the `path`;
 	// defaults to any template
 	'template' => null,

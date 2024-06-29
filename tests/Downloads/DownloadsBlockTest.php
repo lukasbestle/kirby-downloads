@@ -403,6 +403,32 @@ class DownloadsBlockTest extends TestCase
 	/**
 	 * @covers ::hasSearch
 	 */
+	public function testHasSearch_Disabled()
+	{
+		$kirby = $this->kirby->clone([
+			'options' => [
+				'lukasbestle.downloads' => [
+					'search' => false,
+				],
+			],
+		]);
+
+		$block = new DownloadsBlock([
+			'content' => [
+				'uiSearch' => 'true',
+			],
+			'id'     => '12345678-90ab-cdef-1234-567890abcdef',
+			'parent' => $parent = $kirby->page('test1/test2'),
+			'field'  => new Field($parent, 'text', 'abcde'),
+			'type'   => 'downloads',
+		]);
+
+		$this->assertFalse($block->hasSearch());
+	}
+
+	/**
+	 * @covers ::hasSearch
+	 */
 	public function testHasSearch_No()
 	{
 		$block = new DownloadsBlock([

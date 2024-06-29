@@ -120,7 +120,10 @@ class DownloadsBlock extends Block
 	 */
 	public function hasSearch(): bool
 	{
-		return $this->content()->uiSearch()->toBool();
+		return
+			$this->kirby()->option('lukasbestle.downloads.search') === true &&
+			$this->content()->uiSearch()->toBool()
+		;
 	}
 
 	/**
