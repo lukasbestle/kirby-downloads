@@ -124,6 +124,19 @@ if (is_array($fields) === true) {
 	];
 }
 
+$blueprint = [
+	'name' => I18n::translate('lukasbestle.downloads.downloads'),
+	'icon' => 'download',
+];
+
+// only display selection fields if all interface options have been disabled
+if (count($uiFields) === 1) {
+	return [
+		...$blueprint,
+		'fields' => $selectionFields,
+	];
+}
+
 // prepend the info box to the selection fields
 $selectionFields = [
 	'selectionInfo' => [
@@ -134,8 +147,7 @@ $selectionFields = [
 ] + $selectionFields;
 
 return [
-	'name' => I18n::translate('lukasbestle.downloads.downloads'),
-	'icon' => 'download',
+	...$blueprint,
 	'tabs' => [
 		'selection' => [
 			'label'  => I18n::translate('lukasbestle.downloads.selection'),
