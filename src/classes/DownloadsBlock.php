@@ -43,7 +43,7 @@ class DownloadsBlock extends Block
 		/** @psalm-suppress all */
 		$field  = $this->field()?->key();
 
-		if (!$parent || !$field) {
+		if ($parent === null || $field === null || $field === '') {
 			throw new Exception('Parent model or parent field is not known');
 		}
 
