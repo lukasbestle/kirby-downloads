@@ -28,8 +28,8 @@ This plugin is for you if you manage a site with lots of downloads (e.g. product
 
 ## Requirements
 
-- Kirby 3.8.0+ or 4.1.0+
-- PHP 8.1+
+- Kirby 3.8.0+, 4.1.0+ or 5.0.0+
+- PHP 8.2+
 
 ## Documentation
 
