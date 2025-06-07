@@ -2,7 +2,6 @@
 
 use Kirby\Cms\App;
 use Kirby\Exception\Exception;
-use Kirby\Filesystem\F;
 
 /**
  * Kirby Downloads Plugin
@@ -37,10 +36,7 @@ if (
 }
 
 // autoload classes
-F::loadClasses([
-	'LukasBestle\Downloads\Downloads'      => __DIR__ . '/src/classes/Downloads.php',
-	'LukasBestle\Downloads\DownloadsBlock' => __DIR__ . '/src/classes/DownloadsBlock.php',
-]);
+require_once __DIR__ . '/autoload.php';
 
 // register the plugin
 App::plugin('lukasbestle/downloads', [
