@@ -366,7 +366,7 @@ class DownloadsTest extends TestCase
 	{
 		$property = new ReflectionProperty('LukasBestle\Downloads\Downloads', 'instance');
 		$property->setAccessible(true);
-		$property->setValue(null);
+		$property->setValue(null, null);
 
 		$kirby = $this->kirby->clone();
 
