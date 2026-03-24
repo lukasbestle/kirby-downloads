@@ -18,6 +18,11 @@
 		</ignoreFiles>
 	</projectFiles>
 
+	<issueHandlers>
+		<!-- Don't warn about magic methods in the Kirby core -->
+		<UndefinedMagicMethod errorLevel="suppress" />
+	</issueHandlers>
+
 	<plugins>
 		<plugin filename="etc/psalm-plugins/HelperFunctionUsePlugin.php" />
 	</plugins>
