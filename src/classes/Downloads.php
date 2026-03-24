@@ -220,7 +220,7 @@ class Downloads
 		}
 
 		// sort the final option lists alphabetically by their values
-		foreach ($result as $query => $data) {
+		foreach ($result as $query => $_) {
 			asort($result[$query]['options']);
 		}
 

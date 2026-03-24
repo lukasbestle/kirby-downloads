@@ -29,5 +29,13 @@
 		</properties>
 	</rule>
 
-	<rule ref="rulesets/unusedcode.xml" />
+	<rule ref="rulesets/unusedcode.xml">
+		<!-- Separately configured -->
+		<exclude name="UnusedLocalVariable" />
+	</rule>
+	<rule ref="rulesets/unusedcode.xml/UnusedLocalVariable">
+		<properties>
+			<property name="allow-unused-foreach-variables" value="true" />
+		</properties>
+	</rule>
 </ruleset>
