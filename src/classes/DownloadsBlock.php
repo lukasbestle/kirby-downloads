@@ -12,6 +12,7 @@ use Kirby\Toolkit\Str;
 /**
  * DownloadsBlock
  * Model class for the `downloads` block
+ * @api
  *
  * @package   Kirby Downloads Plugin
  * @author    Lukas Bestle <project-kirbydownloads@lukasbestle.com>

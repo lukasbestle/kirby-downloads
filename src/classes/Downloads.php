@@ -14,6 +14,7 @@ use Kirby\Toolkit\Str;
 /**
  * Downloads
  * Collection for the download files with filters and search
+ * @api
  *
  * @package   Kirby Downloads Plugin
  * @author    Lukas Bestle <project-kirbydownloads@lukasbestle.com>
